@@ -32,18 +32,15 @@ var (
 	maxNonce = math.MaxInt64
 )
 
-// Difficulty of mining should be adjust based on pow requirement
-// less then 256 bit in memory
-const targetBits = 18
+const targetBits = 16
 
-// Pointer to a block & target
+// ProofOfWork represents a proof-of-work
 type ProofOfWork struct {
 	block  *Block
 	target *big.Int
 }
 
-// Hash(data + counter) -> big integer and check if less then target
-// if smaller then target then valid proof
+// NewProofOfWork builds and returns a ProofOfWork
 func NewProofOfWork(b *Block) *ProofOfWork {
 	target := big.NewInt(1)
 	target.Lsh(target, uint(256-targetBits))
